@@ -1,13 +1,16 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+
+// Library version
+version = "1.0.0"
 android {
     compileSdkVersion buildVersions.compileSdk
     defaultConfig {
         minSdkVersion buildVersions.minSdk
         targetSdkVersion buildVersions.targetSdk
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -18,6 +21,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    // 這是添加的
+    lintOptions{
+        abortOnError false
+        checkReleaseBuilds false
     }
 }
 
@@ -34,3 +43,5 @@ dependencies {
     implementation deps.androidx.constraintLayout
     implementation deps.androidx.recyclerView
 }
+
+apply from: "$rootDir/bintray.gradle"

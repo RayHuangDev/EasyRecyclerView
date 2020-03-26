@@ -41,12 +41,27 @@ androidx.appCompat = "androidx.appcompat:appcompat:$versions.appCompat"
 androidx.constraintLayout = "androidx.constraintlayout:constraintlayout:$versions.constraintLayout"
 androidx.recyclerView = "androidx.recyclerview:recyclerview:$versions.recyclerView"
 deps.androidx = androidx
+// Ray
+// dependencies library path and versions defined
+def rayPath = "ray.dev.library"
+def rayVersions = [:]
+rayVersions.prettyLoger = "1.0.0"
+rayVersions.easyDialog = "1.0.2"
+rayVersions.easyRecyclerView = "1.0.0"
+def ray = [:]
+ray.prettyLogger = "$rayPath:pretty_logger:$rayVersions.prettyLogger"
+ray.easyDialog = "$rayPath:easy-dialogfragment:$rayVersions.easyDialog"
+ray.easyRecyclerView = "$rayPath:easy-recyclerview:$rayVersions.easyRecyclerView"
+deps.ray = ray
 ext.deps = deps
 
 static def addRepos(RepositoryHandler handler) {
   handler.google()
   handler.jcenter()
   handler.mavenCentral()
+  handler.maven {
+    url 'https://dl.bintray.com/rayhuang/maven'
+  }
 }
 
 ext.addRepos = this.&addRepos
