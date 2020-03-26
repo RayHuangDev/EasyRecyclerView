@@ -1,0 +1,5 @@
+/build
+
+# Test folder
+/src/test/
+/src/androidTest/

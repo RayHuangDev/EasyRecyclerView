@@ -1,0 +1,52 @@
+// build versions defined
+def buildVersions = [:]
+buildVersions.minSdk = 24
+buildVersions.targetSdk = 28
+buildVersions.compileSdk = 28
+buildVersions.buildTools = "28.0.3"
+buildVersions.sourceCompatibility = JavaVersion.VERSION_1_8
+buildVersions.targetCompatibility = JavaVersion.VERSION_1_8
+ext.buildVersions = buildVersions
+/**
+ * Shared file between builds so that they can all use the same dependencies and
+ * maven repositories.
+ **/
+ext.deps = [:]
+// dependencies versions defined
+def versions = [:]
+versions.androidGradlePlugin = "3.5.3"
+versions.kotlin = "1.3.70"
+versions.ktx = "1.0.2"
+versions.appCompat = "1.0.2"
+versions.constraintLayout = "1.1.3"
+versions.recyclerView = "1.1.0"
+// dependencies defined
+def deps = [:]
+// Gradle
+def gradle = [:]
+gradle.android = "com.android.tools.build:gradle:$versions.androidGradlePlugin"
+gradle.kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+deps.gradle = gradle
+// Kotlin
+def kotlin = [:]
+// standard library
+def stdLib = [:]
+stdLib.jdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
+kotlin.stdLib = stdLib
+kotlin.ktx = "androidx.core:core-ktx:$versions.ktx"
+deps.kotlin = kotlin
+// AndroidX
+def androidx = [:]
+androidx.appCompat = "androidx.appcompat:appcompat:$versions.appCompat"
+androidx.constraintLayout = "androidx.constraintlayout:constraintlayout:$versions.constraintLayout"
+androidx.recyclerView = "androidx.recyclerview:recyclerview:$versions.recyclerView"
+deps.androidx = androidx
+ext.deps = deps
+
+static def addRepos(RepositoryHandler handler) {
+  handler.google()
+  handler.jcenter()
+  handler.mavenCentral()
+}
+
+ext.addRepos = this.&addRepos
